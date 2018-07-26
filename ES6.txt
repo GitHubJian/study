@@ -1,0 +1,551 @@
+相等方案有四种
+
+1.let和const命令
+    let
+        1.基本用法
+            不存在变量提升
+            暂时性死区
+            不允许重复声明
+    块级作用域
+        函数声明（ES5函数只能在顶层作用域和函数作用域之中声明）
+            函数声明语句的行为类似于let
+            应该避免在块级作用域内声明函数（可写为函数表达式）
+            必须存在大括号，否则就会报错
+    const
+        1.基本用法
+            变量指向的那个内存地址不得改动
+            对于简单类型的数据值就保存在变量指向的那个内存地址因此等同于常量
+            复合类型的数据（主要是对象和数组）变量指向的内存地址保存的只是一个指针
+            var function let const import class
+    顶层对象的属性
+        var命令和function命令声明的全局变量，依旧是顶层对象的属性
+        let命令、const命令、class命令声明的全局变量(window,global)
+        window->Browser
+        global->Node
+        self->WebWorker
+        system.global
+2.解构赋值
+    解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象,undefined&null is not object
+    扩展运算符 ... 原理就是Iterator
+    数组
+        只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值
+        undefined
+        默认值 Static Equality
+            let [x = 1] = [undefined];
+            let [x = 1, y = x] = [];
+    对象
+        变量必须与属性同名
+            let {foo} = {foo:'1'};//foo 1
+            let {foo:bar}={foo:'1'}//bar 1
+        嵌套结构的对象
+        默认值
+            let {foo=1} = {};//foo 1
+        子对象所在的父属性不存在,throw Error
+    字符串
+    数值和布尔值
+        等号右边是数值和布尔值，则会先转为对象
+    函数参数
+    圆括号问题
+        一个式子到底是模式，还是表达式，没有办法从一开始就知道，必须解析到（或解析不到）等号才能知道
+        只要有可能导致解构的歧义，就不得使用圆括号
+    用途
+        交换变量的值
+        从函数返回多个值
+        函数参数的定义
+        提取 JSON 数据
+        函数参数的默认值
+        遍历 Map 结构
+            for (let [key, value] of map)
+        输入模块的指定方法
+3.String
+    Unicode(ES5: \u0000~\uFFFF ES6: >\uFFFF)
+        e.g.
+        '\u007A' === 'z'
+        '\u{7A}' === 'z'
+    String
+        fromCodePoint
+        raw
+            模板字符串的处理函数
+    String.prototype
+        charPointAt
+            function is32Bit(c) {
+                return c.codePointAt(0) > 0xFFFF;
+            }
+        at
+            返回字符串给定位置的字符
+        normalize
+            许多欧洲语言有语调符号和重音符号
+        includes
+        startsWith
+        endsWith
+        repeat
+            参数
+                Infinity | -1 -> Error
+                NaN -> 0
+                -0.9 -> 0
+                string -> number
+
+4.RegExp
+    构造函数
+        new RegExp(/abc/ig, 'i').flags
+    方法（全都定义在RegExp对象上）
+        RegExp.prototype[Symbol.match]
+        RegExp.prototype[Symbol.replace]
+        RegExp.prototype[Symbol.search]
+        RegExp.prototype[Symbol.split]
+    修饰符
+        u修饰符以后，ES6 就会识别其为一个字符
+        g修饰符只要剩余位置中存在匹配就可
+        y修饰符确保匹配必须从剩余的第一个位置开始
+
+5.Number
+    二进制 0b(0B)
+    八进制 0o(0O)
+    Number.isFinite() 数值是否为有限的
+    Number.isNaN() 值是否为NaN
+        全局方法：非数值的值转为数值，再进行判断
+    Number.parseInt()
+    Number.parseFloat()
+        全局方法相同
+    Number.isInteger()
+        整数和浮点数采用的是同样的储存方法(25 === 25.0）
+    Number.EPSILON === Math.pow(2, -52)
+        误差如果小于这个值，就可以认为已经没有意义了，即不存在误差了
+    Number.MAX_SAFE_INTEGER
+    Number.MIN_SAFE_INTEGER
+    Number.isSafeInteger()
+        判断一个整数是否落在这个范围之内
+6.Math (Number方法将其转为数值)
+    trunc()
+        去除一个数的小数部分，返回整数部分,否则NaN
+    sign()
+        整数 -> +1
+        负数 -> -1
+        0 -> 0
+        -0 -> -0
+        other -> NaN
+    cbrt()
+        立方根
+    clz32()（只考虑整数部分）
+        32位无符号数前导 0 个数
+    imul()
+        32 位带符号整数形式相乘的结果
+    fround()
+        将64位双精度浮点数转为32位单精度浮点数
+    hypot()
+        参数的平方和的平方根,否则NaN
+    双曲函数
+    对数方法
+7.Function
+    参数默认值
+        参数解构赋值
+            fn({x=0}={})
+            fn({x}={x:0})
+        length
+            函数预期传入的参数个数
+        作用域
+            函数进行声明初始化时，参数会形成一个单独的作用域
+        undefined
+            参数可省略
+    rest参数
+        不需要使用arguments对象了
+    严格模式
+        只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错
+        闭包 | 全部设置use strict
+    name
+        (new Function).name // "anonymous"
+        function foo() {});foo.bind({}).name // "bound foo"
+        (function(){}).bind({}).name // "bound "
+    箭头函数
+        () => { a: 1 } // undefined
+        () => void doesNotReturn() 不需要返回值
+    注意
+        this 定义时所在的对象
+        不可以当作构造函数
+        不可以使用arguments对象
+        不可以使用yield命令
+    尾调用（严格模式）
+        某个函数的最后一步是调用另一个函数，只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行“尾调用优化”
+    尾递归（严格模式）
+        由调用帧（call frame）形成调用栈（call stack），解决“栈溢出”问题
+    参数的尾逗号
+8.Array
+    扩展运算符
+        ...[] 用逗号分隔的参数序列
+    替代函数的 apply 方法
+    明确将空位转为undefined
+    Iterator
+        任何 Iterator 接口的对象,都可以用扩展运算符转为真正的数组
+    Array.from(arrayLike[, mapFn[, thisArg]])
+        array-like-object
+        iterable-object
+    Array.of()
+        将一组值，转换为数组
+    Array.prototype
+        copyWithin(target[, start, end])
+        find() true | undefined
+        findIndex() -1
+        fill() 用指定的值填充
+        entries()
+        keys()
+        values()
+        includes()
+9.对象
+    简洁语法糖
+    Object
+        is()
+        assign(tar, src0...srcn)
+            浅拷贝
+            同名属性的替换
+            数组视为对象
+            取值函数的处理: 先求值
+        getOwnPropertyDescriptors()
+        setPrototypeOf(obj, prototype)
+        getPrototypeOf(obj)
+    ES6 规定，所有 Class 的原型的方法都是不可枚举的
+    属性的遍历
+        for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
+        Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名
+        Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
+        Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名
+        Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
+    Object.prototype
+        __proto__
+10.Symbol
+    一个独一无二
+    作为Object的属性标识符
+    消除魔术字符串，解决强耦合
+        const shapeType = {
+            triangle: Symbol()
+        }
+    防止变量被重写
+    类的私有属性
+    Symbol
+        hasInstance 
+            foo instanceOf Foo -> Foo[Symbol.hasInstance](foo)
+        for(description)有返回，无创建（全局的）
+        keyFor()
+11.Set
+    值唯一（Same-value equality）
+    Set.prototype
+        Property
+            constructor()
+            size
+        Method
+            add(v)      返回Set结构本身
+            delete(v)    返回一个布尔值
+            has(v)      返回一个布尔值
+            clear()    清除所有成员
+        Iterator 遍历都是以插入的顺序
+            keys()    返回键名
+            values()    返回键值
+            entries()   返回键值对
+            forEach()   使用回调函数遍历每个成员，kv是相同的
+    Set.prototype[Symbol.iterator] === Set.prototype.values 
+        true
+    并集（Union）、交集（Intersect）和差集（Difference）
+12.WeakSet
+    1.成员只能是对象
+    2.对象弱引用,垃圾回收机制会自动回收该对象所占用的内存
+    WeakSet.prototype
+        add(v)
+        delete(v)
+        has(v)
+13.Map
+    键值对的集合，“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键 
+    new Map([[k,v]]).get('1') undefined
+    只有对同一个对象的引用，Map结构才将其视为同一个键
+    Map.prototype
+        Property
+            size
+        Methods
+            get(k)
+            set(k,v)
+            has(k)
+            delete(k)
+            clear()
+        Iterator 遍历顺序就是插入顺序
+            keys()
+            values()
+            entries()
+            forEach()
+    toArray 可以使用...转成[[k,v]]
+    toObject 所有Map的键都是字符串，它可以转为对象
+14.WeakMap
+    只接受对象作为Key
+    键名是对象的弱引用（垃圾回收机制不将该引用考虑在内）
+15.Proxy
+16.Reflect
+    1.将Object对象的一些明显属于语言内部的方法，放到Reflect对象上
+    2.修改某些Object方法的返回结果，让其变得更合理
+    3.让Object操作都变成函数行为
+    4.Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础
+    Reflect
+        apply(target, thisArg, args)
+            Function.prototype.apply.call(func, thisArg, args)，用于绑定this对象后执行给定函数
+        construct(target,args)
+            等同于new target(...args)
+        get(target,name,receiver)
+            方法查找并返回target对象的name属性，如果没有该属性，则返回undefined
+        set(target,name,value,receiver)
+            target对象的name属性等于value
+        defineProperty(target,name,desc)
+            等同于Object.defineProperty
+        deleteProperty(target,name)
+            等同于delete obj[name]，用于删除对象的属性
+        has(target,name)
+            对应name in obj里面的in运算符
+        ownKeys(target)
+            基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和
+        isExtensible(target)
+            对应Object.isExtensible
+        preventExtensions(target)
+            对应Object.preventExtensions
+        getOwnPropertyDescriptor(target, name)
+        getPrototypeOf(target)
+            对应Object.getPrototypeOf(obj)
+        setPrototypeOf(target, prototype)
+            对应Object.setPrototypeOf(obj, newProto)
+    使用 Proxy 实现观察者模式
+17.Promise
+    1.对象的状态不受外界影响
+    2.一旦状态改变，就不会再变，任何时候都可以得到这个结果
+    3.Promise新建后就会立即执行
+    4.then将在当前脚本所有同步任务执行完才会执行
+    5.resolve(new Promise)时，newPromise决定了整个promise的结果
+    Promise.prototype
+        then(res[,rej])
+        catch() => then(null,rejection)别名 没有catch，promise不会有任何反应
+        finally()
+            指定不管Promise对象最后状态如何，都会执行的操作
+    Promise
+        all(arr)
+            参数可以不是数组，但必须具有Iterator接口，且返回的每个成员都是Promise实例
+        race(arr)
+            有一个实例率先改变状态，p的状态就跟着改变
+        resolve()
+            1.参数是一个Promise实例,返回这个实例
+            2.参数是一个thenable对象,立即执行thenable对象的then方法
+            3.参数是一个原始值，或者是一个不具有then方法的对象,返回状态为Resolved
+            4.不带有任何参数,本次轮训结束时执行
+        reject()
+            参数，会原封不动地作为reject的理由，变成后续方法的参数
+18.Iterator
+    1.创建一个指针对象，指向当前数据结构的起始位置
+    2.不断调用指针对象的next方法，直到它指向数据结构的结束位置
+    3.value属性是当前成员的值，done属性是一个布尔值，表示遍历是否结束
+    4.默认的Iterator接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”（iterable）
+    next可以串行调用
+    应用场景
+        1.结构赋值
+        2.扩展运算符
+        3.yield*
+        4.其他场合
+            for...of
+            Array.from()
+            Set()
+            Map()
+            Promise.all()
+            Promise.race()
+19.Generator
+    function* foo(x, y) { ··· }
+    1.调用Generator后，返回指向内部状态的指针对象，返回一个遍历器对象
+    2.只有当调用next方法、内部指针指向该语句时才会执行
+    3.函数中可以没有yield
+    4.yield语句如果用在一个表达式之中，必须放在圆括号里面
+    5.yield句本身没有返回值，或者说总是返回undefined,next方法可以带一个参数，该参数就会被当作上一个yield语句的返回值
+    6.返回的总是遍历器对象
+    7.函数也不能跟new命令一起用，会报错
+    Generator.prototype
+        throw()
+            Generator函数内部的catch语句只会执行一次
+            执行顺序1.内部捕获一次，2.外部捕获，3.程序中断报错
+            捕获错误之后，如果此后还调用next方法，将返回done属性等于true的对象
+        return()
+            可以返回给定的值，并且终结遍历Generator函数
+            如果Generator函数内部有try...finally代码块，那么return方法会推迟到finally代码块执行完再执行
+    yield
+        yield 只会返回遍历器
+        yield* 执行遍历器
+        如果yield命令后面跟的是一个遍历器对象，需要在yield命令后面加上星号，表明它返回的是一个遍历器对象。这被称为yield*语句
+        实际上，任何数据结构只要有Iterator接口，就可以被yield*遍历
+        命令可以很方便地取出嵌套数组的所有成员
+    Generator是实现状态机的最佳结构，多循环状态管理
+20.异步
+    1.回调函数
+    2.事件监听
+    3.发布/订阅
+    4.Promise 对象
+    Generator
+        "协程"（coroutine），意思是多个线程互相协作，完成异步任务
+        函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因
+        Thunkify
+        CO
+21.Async
+    Generator 函数的语法糖
+    Async函数返回一个 Promise 对象
+    Async函数内部return语句返回的值，会成为then方法回调函数的参数
+    只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数
+    await 命令
+        正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个立即resolve的 Promise 对象。
+        只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行
+        错误处理
+            1.这时可以将第一个await放在try...catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行
+            2.await后面的 Promise 对象再跟一个catch方法，处理前面可能出现的错误
+    并发执行
+        // 写法一
+        let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+            // 写法二
+            let fooPromise = getFoo();
+            let barPromise = getBar();
+            let foo = await fooPromise;
+            let bar = await barPromise;
+    实例：按顺序完成异步操作
+22.Class
+    let methodName = 'abc';
+    const bar = Symbol('bar');
+    const MyClass = class Point extend Parent{
+        constructor(...args){
+            //TODO
+            super();//Parent.prototype.constructor.call(this)
+            this.args = args;
+        }
+        toString(){
+            //TODO
+            //Point.prototype.toString = function(){}
+            //类的内部所有定义的方法，都是不可枚举的
+        }
+        [bar](){
+            //TODO
+            //私有方法
+        }
+        // 存值函数和取值函数是设置在属性的descriptor对象上的
+        get prop(){
+            return 'getter';
+        }
+        set prop(val){
+            console.log('setter: '+value);
+        }
+        [methodName](){
+            //TODO
+            super.p();//super指向父类的原型对象
+        }
+        * [Symbol.iterator](){
+            for(let arg of this.args){
+                yield arg;
+            }
+        }
+        static parse(){
+            //静态方法
+        }
+    }
+    Point.p = 1;//静态属性
+    typeof Point // "function"
+    Point.prototype.constructor === Point // true
+    Class不存在变量提升（hoist）
+    this，它默认指向类的实例
+    默认就是严格模式
+    Point.__proto__ === Parent // true
+    Point.prototype.__proto__ === Parent.prototype // true
+    这两条继承链，可以这样理解
+        1.作为一个对象，子类（B）的原型（__proto__属性）是父类（A）
+        2.作为一个构造函数，子类（B）的原型（prototype属性）是父类的实例
+    ES6可以自定义原生数据结构（比如Array、String等）的子类，这是ES5无法做到的
+    new.target 确保调用的方式
+        不能独立使用、必须继承后才能使用的类
+        子类继承父类时，new.target会返回子类
+23.Decorator
+    用来修改类的行为
+    原始的操作之前执行
+    修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升
+        babel-plugin-transform-decorators
+    Class修饰器
+        function decorator(isTestable) {
+            return function(target) {
+                //修饰器函数的第一个参数，就是所要修饰的目标类
+                target.isTestable = isTestable;
+            }
+        }
+    Method修饰器
+        function readonly(target,name,descriptor){
+            // descriptor对象原来的值如下
+            // {
+            //   value: specifiedFunction,
+            //   enumerable: false,
+            //   configurable: true,
+            //   writable: true
+            // };
+            descriptor.writable = false;
+            return descriptor;
+        }
+    使用修饰器实现自动发布事件
+        function log(target, name, descriptor){
+            var oldVal = descriptor.value;
+
+            descriptor.value = function(){
+                console.log(`Calling ${name} width: ${arguments}`);
+                return oldVal.apply(null, arguments);
+            }
+
+            return descriptor;
+        }
+    Mixin
+        function mixin(...list){
+            return function(target){
+                Object.assign(target.prototype,...list);
+            }
+        }
+
+        @mixin(Foo)
+        class A(){}
+24.Module
+    CommonJS 服务器
+        let {exist} =  require('fs')
+            运行时加载
+            只输出已经执行的部分，还未执行的部分不会输出
+    AMD 浏览器（RequrieJS最流行的实现）
+        import {exist} from 'fs';
+            编译时加载
+            ES6是动态引用其所在的模块，不会关心是否发生了"循环加载"，只是生成一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值   
+    CMD 浏览器（seajs）
+    const A = 1
+    export {A}
+    export {A as B}
+    export const C = 1;
+    export const D = () => {};
+    export default A
+    export {A as default}
+    export default 'hello'
+    export default () => {}
+    import _ from 'lodash'
+    import * as lodash from '_'
+    import {each, map} from 'lodash'
+    import _, {each as forEach, map} from 'lodash'
+    export {each, map} from '_'
+    export {each, map as _map} from '_'
+    export * from '_'
+    export {each as default} from '_'
+    export {default as lodash} from '_'
+    1.按需加载
+        import(specifier)
+            .then(module => {})
+            .catch(e => {})
+    2.条件加载
+    3.动态的模块路径
+25.ES6&CommonJS
+    CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+    CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+    ES6它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
+    CommonJS 加载的是一个对象（即module.exports属性）
+26.二进制数组
+    new Int8Array()           // 8 位有符号整数，长度 1 个字节
+    new Uint8Array()          // 8 位无符号整数，长度 1 个字节
+    new Uint8ClampedArray()   // 8 位无符号整数，长度 1 个字节，溢出处理不同
+    new Int16Array()          // 16 位有符号整数，长度 2 个字节
+    new Uint16Array()         // 16 位无符号整数，长度 2 个字节
+    new Int32Array()          // 32 位有符号整数，长度 4 个字节
+    new Uint32Array()         // 32 位无符号整数，长度 4 个字节
+    new Float32Array()        // 32 位浮点数，长度 4 个字节
+    new Float64Array()        // 64 位浮点数，长度 8 个字节
+    .BYTES_PER_ELEMENT
+    .of()

@@ -1,0 +1,5 @@
+1.Object.getOwnPropertyNames 获取自身的属性keys
+2.Object.getOwnPropertySymbols 获取Symbol属性keys
+3.for in 获取所有可枚举的属性 存在于实例中的属性，也包括存在于原型中的实例 typeof i == 'string'
+4.obj.hasOwnProperty 否存在某自身属性
+5.Reflect.ownKeys(obj) symbol & keys

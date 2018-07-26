@@ -1,0 +1,66 @@
+Request Headers
+    Accept 
+        可接受的响应内容类型
+    Accept-Encoding 
+        可接受的字符集
+    Accept-Language 
+        可接受的响应内容语言列表
+    Accept-Encoding
+        可接受的响应内容的编码方式
+    Cache-Control
+        是否使用缓存机制
+    Cookie
+    Host
+    Referer
+    User-Agent
+        浏览器的身份标识字符串
+    Range
+        请求某个实体的一部分
+    Content-Length
+        以8进制表示的请求体的长度
+    Content-Type
+        请求体的MIME类型 （用于POST和PUT请求中）
+    Origin
+        发起一个针对跨域资源共享的请求
+Response Headers
+    Access-Control-Allow-Origin
+        指定哪些网站可以跨域源资源共享
+    Set-Cookie
+    Server
+    Expires
+    X-Requested-With
+        判断一个请求是传统的HTTP请求，还是Ajax请求
+Methods
+    Connect
+        通过TCP连接代理服务器的(翻墙)
+    Delete
+        删除请求URL所指定的资源
+    Get
+        请求服务器发送某个资源
+    Head
+        只返回Head，1.查看资源是否存在，2.否被修改
+    Options
+        服务器告知其支持的各种功能
+    Patch
+        部分更新
+    Post
+        向服务器写入数据的
+    Put
+        向服务器写入文档
+    Trace
+    Lock
+    Mkcol
+    Copy
+    Move
+状态码
+    消息 1xx 
+        这一类型的状态码，代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束
+    成功 2xx
+        这一类型的状态码，代表请求已成功被服务器接收、理解、并接受
+    重定向 3xx
+        这类状态码代表需要客户端采取进一步的操作才能完成请求
+    请求错误 4xx
+        这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理
+    服务器错误 5xx 6xx
+        这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理
+    

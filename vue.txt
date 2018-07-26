@@ -1,0 +1,151 @@
+Vue
+    Vue.config 全局配置
+        silent 取消 Vue 所有的日志与警告
+        optionMergeStrategies 自定义合并策略的选项
+        devtools 配置是否允许 vue-devtools 检查代码
+        errorHandler 指定组件的渲染和观察期间未捕获错误的处理函数
+        warnHandler 为 Vue 的运行时警告赋予一个自定义处理函数
+        ignoredElements 须使 Vue 忽略在 Vue 之外的自定义元素
+        keyCodes 给 v-on 自定义键位别名
+        performance 设置为 true 以在浏览器开发工具的性能/时间线面板中启用对组件初始化、编译、渲染和打补丁的性能追踪。
+        productionTip 设置为 false 以阻止 vue 在启动时生成生产提示
+    全局API
+        Vue.extend 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象
+            Vue.extend({template,data})
+        Vue.nextTick 在下次 DOM 更新循环结束之后执行延迟回调
+            Vue.nextTick(function(){// DOM 更新了})
+        Vue.set(target,key,value) 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新
+        Vue.delete(target,key) 确保删除能触发更新视图
+        Vue.directive(id,[definition]) 注册或获取全局指令
+            Vue.directive('focus',{hook}})
+            钩子函数 
+                1.bind
+                2.inserted
+                3.update
+                4.componentUpdated
+                5.componentUpdated
+            argument
+                1.el
+                2.binding
+                    {name,value,oldValue,expression,arg,modifiers}
+                3.vnode
+                4.oldVnode
+            函数简写
+                Vue.directive('focus',function(el,binding){})
+                    只会出发钩子函数 bind & update
+        Vue.filter(id,[definition]) 注册或获取全局过滤器
+        Vue.component(id,[definition]) 注册或获取全局组件。注册还会自动使用给定的id设置组件的名称
+            Vue.component('my-component', {})
+                自动调用 Vue.extend 
+        Vue.use(plugin)
+        Vue.mixin(mixin)
+        Vue.compile
+        Vue.version 以根据不同的版本号采取不同的策略
+    选项
+        数据
+            data
+            props
+            propsData
+            computed
+            methods
+            watch
+        DOM
+            el
+            template
+            render
+            reanderError
+        生命周期
+            beforeCreate
+            create
+            beforeMount
+            mounted
+            beforeUpdate
+            updated
+            activated
+            deactivated
+            beforeDestroy
+            destroyed
+            errorCaptured
+        资源
+            directives
+            filters
+            components
+        组合
+            parent
+            mixins
+            extends
+            provide/inject
+        其他
+            name
+    实例vm
+        属性
+            $data
+            $props
+            $el
+            $options    
+            $parent
+            $root
+            $children
+            $slots
+            $refs
+            $isServer
+            $attrs
+            $listeners
+        数据
+            $watch
+            $set
+            $delete
+        事件
+            $on
+            $once
+            $off
+            $emit
+        生命周期
+            $mount
+            $forceUpdate
+            $nextTick
+            $destroy
+
+核心思想
+    0.方法
+        //初始化的入口，各种初始化工作
+        initMixin(Vue) 
+        //数据绑定的核心方法，包括常用的$watch方法
+        stateMixin(Vue)
+        //事件的核心方法，包括常用的$on，$off，$emit方法
+        eventsMixin(Vue)
+        //生命周期的核心方法
+        lifecycleMixin(Vue)
+        //渲染的核心方法，用来生成render函数以及VNode
+        renderMixin(Vue)
+    1.数据驱动
+        原理
+            Object.defineProperty和存储器属性Getter & Setter,基于依赖收集的观测机制
+            1.将原声的数据改造成“可观察对象” Getter & Setter
+            2.watcher 求值过程，可观察的对象将watcher作为自己的一个订阅者，并成为当前watcher的一个依赖
+            3.当一个被依赖的可观察对象被赋值时，通知notify所有订阅自己watcher重新求值，并出发相应的更新，DOM改变渲染
+        问题
+            1.arr.length 无法被监听
+            2.arr[0] = 1 无法被监听
+    2.Vdom
+        原理：
+            1.优先处理特殊场景
+                1.头部的同类型节点、尾部的同类型节点
+                2.头尾/尾头的同类型节点
+            2.原地复用，如果是同类(tagName)节点，那么Vue会直接复用
+        步骤
+            双指针夹逼查找更新
+            1.循环处理
+                头部同类型节点
+                尾部同类型节点
+                头尾/尾头同类型节点
+                新增节点
+                更新节点
+            2.循环后处理
+                删除节点
+    3.组件化
+        扩展HTML元素，封装可重用代码
+        1.有效的HTML片段
+        2.使用props传递数据，单向绑定，.sync或.once绑定修饰符显式地强制双向或单次绑定，对象或数组，是按引用传递
+        3.slot，特殊特性name配置如何分发内容，找不到匹配的内容片段将被抛弃
+        4.keep-alive 通过缓存机制快速创建组件
