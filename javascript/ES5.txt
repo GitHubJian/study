@@ -1,0 +1,38 @@
+String
+    String.prototype
+        trim() 去除字符串两边的空白
+    访问字符串的属性
+Array
+    Array.isArray(obj)
+    Array.prototype.indexOf(item,start)
+    Array.prototype.lastIndexOf(item,start)
+    Array.prototype.every(function(currentValue, index,arr){}, thisValue) 
+    Array.prototype.some(function(currentValue, index,arr){}, thisValue)
+    Array.prototype.forEach(function(currentValue, index, arr), thisValue)
+    Array.prototype.map(function(currentValue, index, arr), thisValue)
+    Array.prototype.filter(function(currentValue, index, arr), thisValue)
+    Array.prototype.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    Array.prototype.reduceRight(function(total, currentValue, currentIndex, arr), initialValue)
+Date
+    Date.now() 返回当前时间戳
+    Date.prototype.toISOString()
+    Date.prototype.toJSON()
+JSON
+    JSON.parse()
+    JSON.stringify()
+Function
+    Function.prototype.bind()
+Object
+    Object.keys(obj) 自身枚举 return []
+    Object.create(prototype[,propertiesObject]) return obj
+    Object.defineProperty(obj,prop,descriptor) 修改或新增，return obj
+    Object.defineProperties(obj,props) 修改或新增，return obj
+    Object.getPrototypeOf(obj) return __proto__
+    Object.getOwnPropertyNames(obj) 一个由指定对象的所有自身属性的属性名,return []
+    Object.getOwnPropertyDescriptor(obj,prop) return descriptor
+    Object.seal(obj) 只有属性值可以修改
+    Object.freeze(obj) 对象永远是不可变的
+    Object.preventExtensions(obj) 对象不能再添加新的属性，可以修改可以删除
+    Object.isSealed()
+    Object.isFrozen()
+    Object.isExtensible()
