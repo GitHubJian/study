@@ -73,5 +73,12 @@ Vuex
             methods:{
                 ...mapAction([])
             }
+        5.Module
+            命名空间
+                默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间
+                namespaced: true
+                注意： state 和 getter，调用
+            模块动态注册
+                store.registerModule('myModule', {// TODO })
 
 
