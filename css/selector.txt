@@ -1,0 +1,137 @@
+类型
+    基础
+        1. 通配符  v2
+        2. id v1
+        3. class v1
+        4. element v1
+    层级
+        1. , v1
+            div,p 选择div&p
+        2. space v1
+            div p 选择div中所有的p
+        3. > v2
+            div>p 选择div的子元素p
+        4. + v2
+            div+p 选择紧接在div之后的p
+        5. ~ v3
+            div~p 选择前面有div的所有p
+    Attribute
+        1. [attribute]
+            选择具有attr属性的元素
+        2. [attribute = val]
+            选择属性attr等于val的元素
+        3. [attribute *= val]
+            选择属性attr包含val的元素
+        4. [attribute ~= val] v2
+            选择属性attr包含val的元素
+        5. [attribute ^= val] v3
+            选择属性attr以val开头的元素
+        6. [attribute $= val] v3
+            选择属性attr以val结尾的元素
+        7. [attribute |= val] v2
+            选择属性attr以val结尾的元素
+    Psuedo-Class
+        1. :before v2
+            之前插入内容
+        2. :after v2
+            之后插入内容
+        3. :first-letter v1
+            首字母
+        4. :first-line v1
+            首行
+    索引
+        1. :first-child v2
+        2. :last-child v3
+        3. :only-child v3
+        4. :nth-child(n) v3
+        5. :nth-last-child(n) v3
+        6. :first-of-type v3
+        7. :last-of-type v3
+        8. :only-of-type v3
+        9. :nth-of-type(n) v3
+        10. :nth-last-of-type(n) v3
+    表单
+        1. :focus v2
+            input:focus 
+        2. :enabled v3
+            input:enabled
+        3. :disabled v3
+            input:disabled
+        4. :checked v3
+            input:checked
+    a链接
+        1. :link v1
+            未被访问
+        2. :visited v1
+            已被访问
+        3. :active v1
+            活动
+        4. :hover v1
+            鼠标指针
+    其他
+        1. :not() v3
+        2. :empty v3
+            p:emptye 没有子元素的每个p
+        3. :target v3
+            p:target 当前活动p
+        4. :selection v3
+            ::selection 用户选取的元素部分
+        5. :root v3
+        6: :lang v2
+权重（由上至下）
+    1.important
+    2.style
+        1000
+    3.id
+        100
+    4.class attribute psuedo-class
+        10
+    5.element
+        1
+    6.通配符
+        0
+    7.浏览器自定义
+        无
+    ul#nav li.active a 
+        权重：113
+解析规则
+    https://blog.csdn.net/jinboker/article/details/52126021
+    从右至左
+    只需要匹配父元素
+规范
+    http://nec.netease.com/standard/css-sort.html
+    分类方法
+        1.公共型样式
+        2.特殊型样式
+        3.皮肤型样式
+        内部分类
+            1.重置（reset）和默认（base）（tags）
+            2.统一处理
+            3.布局（grid）（.g-）
+            4.模块（module）（.m-）
+            5.元件（unit）（.u-）
+            6.功能（function）（.f-）
+            7.皮肤（skin）（.s-）
+            8.状态（.z-）
+    优化方案
+        1.值缩写
+        2.避免耗性能的属性
+        3.选择器合并
+        4.背景图优化合并
+        5.Hack的避免
+        6.如果CSS可以做到，就不要使用JS
+        7.便于阅读修改
+        8.文件压缩
+    属性书写方案
+        先显示定位布局类属性，后盒模型等自身属性，最后是文本类及修饰类属性
+        如果属性间存在关联性，则不要隔开写
+        0. 显示属性 -> 自身属性 -> 文本属性和其他修饰
+        1. display -> width -> font
+        2. visibility -> height -> text-align
+        3. position -> margin -> text-decoration
+        4. float -> padding -> vertical-align
+        5. clear -> border -> white-space
+        6. list-style -> overflow -> color
+        7. top -> min-width -> background
+
+    
