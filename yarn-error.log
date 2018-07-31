@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.9.2/libexec/bin/yarn.js add only
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.9.2
+
+Node version: 
+  10.7.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/only/-/only-0.0.2.tgz: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/Cellar/yarn/1.9.2/libexec/lib/cli.js:138076:19)
+      at ontimeout (timers.js:427:11)
+      at tryOnTimeout (timers.js:289:5)
+      at listOnTimeout (timers.js:252:5)
+      at Timer.processTimers (timers.js:212:10)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
