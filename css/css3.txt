@@ -1,0 +1,74 @@
+边框
+    border-radius
+    box-shadow
+    border-image
+背景
+    background-size
+        背景图片的尺寸
+    background-origin
+        背景图片的定位区域，content-box、padding-box 或 border-box
+文本
+    text-shadow
+    word-wrap
+字体
+    @font-face
+        font-family
+        src
+        font-stretch
+        font-style
+        font-weight
+        unicode-range
+动画
+    使元素从一种样式逐渐变化为另一种样式的效果
+    from | 0  -> to | 100%
+    animation
+    animation-name 
+        @keyframes 动画的名称
+    animation-duration
+        动画完成一个周期所花费的秒或毫秒。默认是 0
+    animation-timing-function
+        动画的速度曲线。默认是 "ease"
+    animation-delay
+        动画何时开始。默认是 0
+    animation-iteration-count
+        动画被播放的次数。默认是 1
+    animation-direction
+        动画是否在下一周期逆向地播放。默认是 "normal"
+    animation-play-state
+        动画是否正在运行或暂停。默认是 "running"
+    animation-fill-mode
+        对象动画时间之外的状态
+
+    @keyframes animationname {keyframes-selector {css-styles;}}
+        @-moz-keyframes
+        @-o-keyframes
+        @-webkit-keyframes
+过渡
+    元素从一种样式逐渐改变为另一种的效果
+    transition
+    transition-property  CSS 属性的名称
+    transition-duration 过渡效果花费的时间。默认是 0
+    transition-timing-function 过渡效果的时间曲线。默认是 "ease"
+    transition-delay 过渡效果何时开始。默认是 0
+2D转换
+    translate() 从其当前位置移动
+    rotate() 元素顺时针旋转给定的角度
+    scale() 元素的尺寸会增加或减少
+    skew() 元素翻转给定的角度
+    matrix() 方法把所有 2D 转换方法组合在一起
+3D转换
+    transform
+        rotateX()
+        rotateY()
+    transform-origin 默认值50% 50% 0
+        x-axis y-axis z-axis
+    transform-style
+    perspective
+    perspective-origin
+    backface-visibility
+多列
+    column-count 元素应该被分隔的列数
+        number|auto
+    column-gap 列之间的间隔
+
+    column-rule 列之间的宽度、样式和颜色
