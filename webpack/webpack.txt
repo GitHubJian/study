@@ -1,0 +1,18 @@
+配置
+    context
+        基础目录，绝对路径。用于从配置中解析入口起点(entry point)和 loader
+            path.resolve(__dirname,'app');
+    entry
+        起点或是应用程序的起点入口
+    output
+        webpack 如何输出、以及在哪里输出
+    module
+        如何处理项目中的不同类型的模块
+    resolve
+        设置模块如何被解析
+    plugins
+
+    performance
+        配置如何展示性能提示
+    stats
+        统计信息
