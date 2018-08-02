@@ -2,9 +2,9 @@
     npm包
         eslint
         eslint-loader
+            https://www.npmjs.com/package/eslint-loader
     配置文件
         .eslintrc.js
-    
 
     module.exports = {
         root: true,   //  eslint找到这个标识后，不会再去父文件夹中找eslint的配置文件
