@@ -1,0 +1,7 @@
+HappyPack
+extract-text-webpack-plugin
+clean-webpack-plugin
+copy-webpack-plugin
+assets-webpack-plugin
+webpack-parallel-uglify-plugin
+html-webpack-include-assets-plugin
