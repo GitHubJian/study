@@ -107,17 +107,6 @@ Vue
             $destroy
 
 核心思想
-    0.方法
-        //初始化的入口，各种初始化工作
-        initMixin(Vue) 
-        //数据绑定的核心方法，包括常用的$watch方法
-        stateMixin(Vue)
-        //事件的核心方法，包括常用的$on，$off，$emit方法
-        eventsMixin(Vue)
-        //生命周期的核心方法
-        lifecycleMixin(Vue)
-        //渲染的核心方法，用来生成render函数以及VNode
-        renderMixin(Vue)
     1.数据驱动
         原理
             Object.defineProperty和存储器属性Getter & Setter,基于依赖收集的观测机制
@@ -127,7 +116,33 @@ Vue
         问题
             1.arr.length 无法被监听
             2.arr[0] = 1 无法被监听
-    2.Vdom
+    2.Compile
+        三个阶段
+            1.parse 函数解析 template（Abstract Syntax Tree 抽象语法树）
+                嵌套的、携带标签名、属性和父子关系的 JS 对象，以树来表现 DOM 结构
+                ASTElement ASTExpression ASTText
+                通过 RegExp 截取指令
+                    特殊v-for addHandler 
+                    普通指令 addDirective
+            2.optimize 函数优化静态内容
+                静态内容指的是和数据没有关系，不需要每次都刷新的内容
+                step1:标记所有的静态和非静态结点
+                    isStatic 
+                        3种情况
+                            1.ASTExpression
+                            2.ASTText
+                            3.ASTElement
+                    if  
+                        本身&后代节点都是static，返回static
+                step2:标记静态根节点
+                    优化点
+            3.generate 函数创建 render 函数字符串，最终生成render函数等待调用
+                generate->genElement->1.genData2.genChildrenElement(递归)3.return renderfn
+                    _c：对应的是 createElement 方法(Vnode)
+                    _v：创建一个文本结点
+                    _s：把一个值转换为字符串。（eg: {{data}}）
+                    _m：渲染静态内容
+    3.Vdom
         原理：
             1.优先处理特殊场景
                 1.头部的同类型节点、尾部的同类型节点
@@ -143,9 +158,21 @@ Vue
                 更新节点
             2.循环后处理
                 删除节点
-    3.组件化
+方法
+        //初始化的入口，各种初始化工作
+        initMixin(Vue) 
+        //数据绑定的核心方法，包括常用的$watch方法
+        stateMixin(Vue)
+        //事件的核心方法，包括常用的$on，$off，$emit方法
+        eventsMixin(Vue)
+        //生命周期的核心方法
+        lifecycleMixin(Vue)
+        //渲染的核心方法，用来生成render函数以及VNode
+        renderMixin(Vue)
+组件化
         扩展HTML元素，封装可重用代码
         1.有效的HTML片段
         2.使用props传递数据，单向绑定，.sync或.once绑定修饰符显式地强制双向或单次绑定，对象或数组，是按引用传递
         3.slot，特殊特性name配置如何分发内容，找不到匹配的内容片段将被抛弃
         4.keep-alive 通过缓存机制快速创建组件
+                
