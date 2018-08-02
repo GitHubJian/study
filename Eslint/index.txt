@@ -1,0 +1,59 @@
+http://eslint.cn/docs/user-guide/configuring
+Configuring
+    方法1. 使用js注释把配置信息直接嵌入到一个代码源文件中
+    方法2. .eslintrc.* 或者 package.json 文件里的 eslintConfig 字段指定配置 或者 命令行
+Specifying Parser Options
+    ecmaVersion
+    sourceType
+    ecmaFeatures
+        e.g.
+            parserOptions: {
+                ecmaVersion: 6
+            }
+Specifying Parser
+    Espree（默认）
+    Babel-ESLint 
+        e.g. 
+            'parser':'espree'
+Specifying Environments
+    browser
+    node
+        e.g.
+            'env': {
+                'browser': true,
+                'node': true
+            }
+Specifying Globals
+    全局变量是否允许被重写，true
+    e.g.
+        "globals": {
+            "var1": true,
+            "var2": false
+        }    
+Configuring Plugins
+    可以省略eslint-plugin
+    e.g.
+        plugins: ['eslint-plugin-html', 'import'],
+Configuring Rules
+    "off" 或 0 - 关闭规则
+    "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
+    "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
+    e.g.
+        rules: {
+            quotes: ["error", "double"]
+        }
+Configuration File Formats
+    js -> .eslintrc.js
+Configuration Cascading and Hierarchy
+    层叠配置使用离要检测的文件最近的 .eslintrc文件作为最高优先级，然后才是父目录里的配置文件
+    e.g.
+        {
+            "root": true //停止在父级目录中寻找
+        }
+Extending Configuration Files
+    extends 
+        1.字符串
+        2.字符串数组：每个配置继承它前面的配置
+Comments in Configuration Files
+Ignoring Files and Directories
+    项目根目录创建一个 .eslintignore (Glob Patterns)
