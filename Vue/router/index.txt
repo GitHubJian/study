@@ -1,0 +1,8 @@
+方案
+    1.Hash: 通过改变hash值
+    2.History: 利用history对象新特性
+        H5新特性
+        pushState
+        back
+        forward
+        go
