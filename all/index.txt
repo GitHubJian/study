@@ -1,0 +1,67 @@
+NODE层抽像化
+    多系统统一入口处理
+    sso
+    persimmion
+        针对某一用户是否有访问权限
+    反向代理
+        解决跨域问题
+        多环境多配置
+    webpackdev
+    自定义mw
+        action
+        多api请求ui层
+    vue架构抽象化
+        service
+        npm包管理固定不变的组件
+    genMock
+        database
+        file
+            清除mock数据缓存
+        DataValidate
+    genApi
+    图片压缩
+        多文件多路径单一打包下载
+            文件的断点续传
+webpack
+    多入口文件打包
+        pre web after
+    eslint检测
+        增量 & 全量
+        getDiff
+    dll打包
+web 层
+    缓存    
+        解析相关的api生成前端api
+        整个缓存的过程
+            webwoker
+            1.登陆时用户自动选择是否需要缓存
+            2.数据
+                通过后段的diff（针对日志的diff）算法获取相关数据
+            3.权限
+                通过权限的diff，获取那些权限发生了变化，调用数据的diff接口，自动更新缓存数据
+            4.Enum等
+                通过配置平台的diff算法，获取相关的数据
+            5.某一缓存数据为空时
+                isRequire是否请求过了
+            接口细节部分
+                通过统一的硬编码配置
+                require.js
+                mock
+                    会链接到node层的数据库
+                maxAge：最大生命时间
+                type ：cookie storage
+    表单教研
+        树形解析
+    工具函数
+        较为轻量级的工具库
+    功能权限
+        通过getAuth获取，然后自动赋值到相关的组件
+    配置中心
+    文件上传
+        针对el-upload再次封装
+            自动添加文件相关的请求头
+    search搜索的历史记录
+        vue-router
+    toLink
+Test
+    搭建自动化测试服务架构
