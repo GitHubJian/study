@@ -1,0 +1,32 @@
+https://blog.risingstack.com/finding-a-memory-leak-in-node-js/
+1. 对象分配
+    process.memoryUsage();
+2. 垃圾回收
+    代码 Code：实际被执行的代码
+    栈 Stack：栈中存储着本地变量、指向堆中对象的指针、定义应用程序控制流的指针。
+    堆 Heap：专门用于存储“引用类型”的对象，例如字符串或对象
+    方法
+        1.Scavenge（提取），速度快但不彻底
+        2.Mark-Sweep（标记-清除），相对慢一点，但是可以回收所有未被引用的内存
+    New Space
+        Young Generation
+        Scavenge
+        通常只有20%左右的新生代会晋升为老生代
+    Old Space
+        Old Generation
+        Mark-Sweep -> Mark-Compact(将不被清理的对象移动到另一端)
+        老生代空间只有在快被耗尽的时候，才会执行垃圾回收
+        老生代空间中，存储着那些新生代空间中未被回收，晋升至此的对象
+经典Case 
+    The Meteor Case-Study
+基于分代式垃圾回收机制
+    新生代中的对象为存活时间较短的对象
+    老生代中的对象为存活时间较长或常驻内存的对象
+一个是对象是否经历过Scavenge回收
+    From Space 经历了Scavenge 算法直接到 OldGeneration
+    From Space 没有经历Scavenge到To Space
+一个是To空间的内存占用比超过限制
+    如果ToSpace占用量超过25%，直接到OldGeneration
+    超过25%后，TO&From空间发生互换
+    
+

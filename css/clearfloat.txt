@@ -1,0 +1,17 @@
+1. 在浮动元素下方添加空div,并给该元素写css样式（BFC 方案）
+    {clear:both;height:0;overflow:hidden;}
+2.给浮动元素父级设置高度
+3.父级设置成inline-block(BFC 方案)
+4.br 清浮动
+    <br clear="both">
+5.给父级添加overflow:hidden(BFC 方案)
+6.父元素float（BFC 方案）
+7.万能
+    div:after{
+        content:".";
+        clear:both;
+        display:block;
+        height:0;
+        overflow:hidden;
+        visibility:hidden;
+    }

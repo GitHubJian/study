@@ -1,0 +1,24 @@
+babel包
+    babel-core: bable转译器本身，提供了babel的转译的API，如babel.transform等，用于对代码进行转译
+    babylon : js的词法解析器
+    babel-traverse : 用于对AST(abstract syntax tree)抽象语法树的遍历
+    babel-generator : 根据AST生成 代码
+
+babel-core
+babel-eslint
+babel-loader
+babel-plugin-syntax-jsx
+babel-plugin-transform-runtime
+babel-plugin-transform-vue-jsx
+babel-polyfill
+babel-preset-env
+babel-preset-stage-1
+
+三个阶段
+    1.parsing 
+        babelon进行解析得到AST
+    2.transforming
+        plugin用babel-traverse对AST树进行遍历得到新的AST树
+    3.generating
+        使用babel-genertor通过AST树生成es5代码
+

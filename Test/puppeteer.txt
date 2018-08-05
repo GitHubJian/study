@@ -1,0 +1,13 @@
+https://github.com/GoogleChrome/puppeteer/blob/v1.6.2/docs/api.md
+class:Puppeteer
+    launch
+class:Browser
+    close
+class:Page
+    $
+    click    
+class:Mouse
+    click
+    down
+    move
+    up

@@ -1,0 +1,24 @@
+libev
+    libev不断检查是否有活动的、可供检测的事件监听器，直到检查不到时才退出事件循环，程序结束
+    1）在每次执行脚本的时候，Node就开始进入事件轮询机制；
+    2）直到所有回调函数都被执行完成后，Node才会退出事件轮询机制；
+    3）Nodejs中的事件轮询机制的结构，对开发者是隐藏的，不可见的
+步骤
+1）NodeJs程序由事件循环开始，到事件循环结束，所有的逻辑都是事件的回调函数，所以NodeJs始终在事件循环中，程序入口就是事件循环第一个事件的回调函数。
+2）在回调函数中，可能会进行耗时的异步I/0操作，这时，NodeJs底层便会调用Libuv完成异步函数的具体实现，因此，使用回调函数处理I/O操作，并不会阻塞主程序的运行。
+3）每次异步函数执行结束后，都会在事件队列中追加一个事件（同时，保存一些必要的参数）。事件轮询下一次循环便可取出事件，然后会调用异步方法所绑定的回调函数（因为，回调函数是绑定在事件上的，监听的事件发生，其相对应的回调函数便会被触发执行）。这样一来，nodejs便能保证开发者编写的每行代码（每个回调函数）均在主线程中执行。
+4）需要注意的一点是： 如果开发者在回调函数中调用了阻塞方法，那么整个事件轮询就会被阻塞，事件队列中的事件便得不到及时处理。
+执行顺序
+    idle观察者 > I/O观察者 > setTimeout > setImmediate
+    1.idle观察者 process.nextTick
+        放在了nextTickQueue 中，所有的 nextTick 都会在本次循环执行前执行
+    2.IO 一般性的I/O回调，如网络，文件，数据库I/O
+    同步代码执行顺序优先级高于异步代码执行顺序优先级；
+    new Promise(fn)中的fn是同步执行；
+    process.nextTick()>Promise.then()>setTimeout>setImmediate
+    
+由于其他micro-task 的 优先级高于macro-task
+    micro-task
+        process.nextTick, Promise(原生)，Object.observe，MutationObserver
+    macro-task 
+        script (整体代码)，setTimeout, setInterval, setImmediate, I/O, UI rendering

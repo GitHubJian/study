@@ -1,0 +1,8 @@
+http://shouldjs.github.io/
+Global
+    Assertion.add
+assertion assert
+    equal
+    fail
+    ok
+    throw

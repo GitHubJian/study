@@ -1,0 +1,30 @@
+方案1:
+    <parent>
+        <left></left>
+        <right></right>
+        <center></center>
+    </parent>
+    parent{positive:relative}
+    left{float:left;height:100%,width:100px;}
+    right{float:right;height:100%,width:200px;}
+    center{hight:100%;margin:0 200px 0 100px;overflow:hidden;}
+方案2:
+    <parent>
+        <left></left>
+        <center></center>
+        <right></right>
+    </parent>
+    parent{relative}
+    left{absoult,height:100%;}
+    right{absoult,height:100%;}
+    center{margin:0 10px;height:100%}
+    ---或者----css3
+    parent{display:box}
+    left{width:100px}
+    right{width:100px}
+    center{box-flex:1}
+    ---或者----css3
+    parent{display:flex}
+    left{flex-basis:100px}
+    right{flex-basis:200px}
+    center{flex-grow:1}

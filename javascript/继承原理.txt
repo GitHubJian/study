@@ -1,0 +1,29 @@
+核心思想
+    当查找一个对象的属性时，JavaScript 会向上遍历原型链 __proto__ ，直到找到给定名称的属性为止
+__proto__ 一个对象拥有的内置属性，是JS内部使用寻找原型链的属性
+prototype 是函数的一个属性（每个函数都有一个prototype属性），这个属性是一个指针，指向一个对象。它是显示修改对象的原型的属性
+new F()
+    Step1.
+        创建类的实例。这步是把一个空的对象的 __proto__ 属性设置为 F.prototype 
+    Step2.
+        初始化实例。函数 F 被传入参数并调用，关键字 this 被设定为该实例
+    Step3.
+        返回实例
+    ployfill
+        function NEW(f){
+            let n = {'__proto__': f.prototype};
+            return function(){
+                f.apply(n, arguments);
+                return n;
+            }
+        }
+        function Pint(1){};
+        NEW(Pint)(1)
+经典实现
+    function Parent(){}
+    function Child(){}
+    Child.prototype = new Parent();
+
+
+
+

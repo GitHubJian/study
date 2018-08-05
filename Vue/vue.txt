@@ -175,6 +175,19 @@ Vue
         2.使用props传递数据，单向绑定，.sync或.once绑定修饰符显式地强制双向或单次绑定，对象或数组，是按引用传递
         3.slot，特殊特性name配置如何分发内容，找不到匹配的内容片段将被抛弃
         4.keep-alive 通过缓存机制快速创建组件
-                
-
+注意
+    Array
+        1.vm.items[indexOfItem] = newValue
+        2.vm.items.length = newLength
+    原因
+        由于 JavaScript 的限制，Vue 不能检测以下变动的数组
+    方案
+        数据是在初始化是完成了数据的双向绑定，所以必须通过vue.$set(arr,index,value)
+        vm.arr.splice(length)           
+    Object
+        obj.b = 1;
+    原因
+        Vue 不能检测对象属性的添加或删除
+    方案
+        vm.$set(vm.obj, 'b', 1)
        
