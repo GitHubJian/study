@@ -36,15 +36,21 @@ function findPath(node, id, path) {
     if (!path) {
         path = [];
     }
+
+    path.push(node);
     if (node.id === id) {
         return true;
+    }else{
+        
     }
-    path.push(node);
     if (Array.isArray(node.item) && node.item.length > 0) {
         for (let i = 0, len = node.item.length; i < len; i++) {
             let a = findPath(node.item[i], id, path);
             if (a === false) {
                 path.pop();
+            }
+
+            if (a === true) {
             }
         }
     }
