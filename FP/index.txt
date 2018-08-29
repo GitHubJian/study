@@ -1,0 +1,65 @@
+编程思想
+1.什么是编程思想
+编程：计算机为解决某个问题2️而使用的某种程序设计语言编写程序代码，并最终得到相应的结果
+思想：通过更简单的逻辑实现比较复杂的逻辑，俗称：优化
+2.常见的思想
+1.OOP(Object-oriented Programming)
+    封装多态继承
+    A对象与B对象的关系是OOP语言中首要考虑的问题
+    推广程序的灵活性与可维护性，更加便于分析设计理解易拓展，可以设计出高内聚低耦合的系统结构，成本低
+    以数据为中心，并发中导致数据的不确定性，理解不够透彻写出非常晦涩难懂的烂尾工程
+    抽象的核心是数据
+2.PP(Procedural Programming)
+3.FP(Functional Programming)
+    lambda calculus 用函数作为输入输出
+    可以保证数据的正确性，代码可读性更高
+    内存占用量较大
+    抽象的核心是函数
+4.函数式编程
+    自变量 -->  数学函数 -->  因变量
+    特点
+        1.函数是第一等公民
+        2.计算过程分解成可复用的函数
+        3.避免了状态与数据的改变
+        4.高并发
+    来源
+        1.范畴论
+            In mathematics, a category is an algebraic structure that comprises "objects" that are linked by "arrows".
+            范畴就是使用箭头连接的物体
+        2.数据模型
+            所有的成员是一个集合
+            变形关系就是函数
+        3.值的变形关系，也就是函数
+        4.范畴论使用函数，表达范畴之间的关系
+    形成
+        Value A经过多个函数变为另一个B，这个过程就叫做函数的合成
+        函数的合成需要一定的结合律来完成
+    函子
+        函数式编程里面最重要的数据类型，也是基本的运算单位和功能单位
+        一种范畴
+    of方法
+        函数式编程一般约定，函子有一个of方法，用来生成新的容器
+    Maybe 函子
+    Either 函子
+    ap 函子
+    Monad 函子
+4.比较典型的Case
+    闭包
+    高阶函数
+    返回函数
+    偏函数
+    柯里化
+    递归、尾调用和尾递归
+    链式调用
+    组合(装饰器模式)
+
+推荐图书
+    https://item.jd.com/1681098856.html
+推荐网站
+    https://www.cnblogs.com/zhenw/p/6160931.html
+    http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html
+    https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/
+    https://www.jdon.com/functional.html
+
+
+
