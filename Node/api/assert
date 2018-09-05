@@ -1,0 +1,52 @@
+// 用静态模式 *****
+const assert = require("assert")
+
+assert(value[,message]) assert.ok(value[,message])
+    return being truthy
+
+assert.deepEqual(actual, expected[, message])
+    相等
+        1.Abstract Equality Comparison(==)
+        2.only enumerable "own" properties
+        3.not test [[Prototype]]
+        4.not attacted symbols
+        5.non-enumerable prototies
+        6.error for map & set
+assert.notDeepEqual(actual,expected[,message])
+    Opposite of assert.deepEqual()
+
+assert.deepStrictEqual(actual, expected[, message])
+    静态相等
+        1.Primitive value By Strict Equality Comparison(===)
+        2.Set & Map by SameValueZero
+        3.[[Prototype]]
+        4.Type tags
+        5.Object wrappers as objects
+assert.notDeepStrictEqual(actual,expected[,message])
+    Opposite of assert.deepStrictEqual();
+
+assert.doseNotThrow(block[, error][, message])
+    block抛出异常
+
+assert.equal(actual, expected[, message])
+assert.notEqual(actual,expected[,message])
+    Equal by Abstract Equality Comparison(!=)
+
+assert.fail(message)
+assert.fail(actual, expected[,message[,operator[,stackStartFunction]]])
+    是否不等
+        operator <default: !=>
+
+assert.ifError(value)
+    Throws value if value is truthy.
+
+assert.strictEqual(actual,expected[,message])
+assert.notStrictEqual(actual,expected[,message])
+    Equal by Strict Equality Comparsion(!==)
+
+
+    
+
+
+
+
