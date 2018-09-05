@@ -1,0 +1,29 @@
+path.basename(path[,ext]) 
+    返回最后一部分
+path.delimiter
+    分割符 
+        posix : 
+        window ;
+path.dirname(path)
+    返回路径
+path.extname(path)
+    返回扩展名
+path.format
+path.parse
+┌─────────────────────┬────────────┐
+│          dir        │    base    │
+├──────┬              ├──────┬─────┤
+│ root │              │ name │ ext │
+"  /    home/user/dir / file  .txt "
+└──────┴──────────────┴──────┴─────┘
+
+path.isAbsoulte(path)
+    是否绝对路径
+path.join([...paths])
+    返回组合路径
+path.normalize(path)
+    返回格式化路径
+path.relative(form,to)
+    返回相对路径
+path.resolve([...paths])
+    返回绝对路径

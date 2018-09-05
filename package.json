@@ -1,0 +1,24 @@
+{
+  "name": "study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "I&G.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jsdoc": "jsdoc -c jsdoc.config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitHubJian/study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GitHubJian/study/issues"
+  },
+  "homepage": "https://github.com/GitHubJian/study#readme",
+  "dependencies": {
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.1"
+  }
+}
