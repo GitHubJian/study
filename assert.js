@@ -1,5 +1,7 @@
-const assert = require('assert');
+const a = [1, 2, 3];
+const buf = Buffer.from(a);
+console.log(buf);
 
-assert.ifError(null);
+a[1] = 4;
 
-assert.ifError(1)
+console.log(buf);

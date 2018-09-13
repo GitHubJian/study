@@ -1,0 +1,2 @@
+解决calc的变量问题
+width: calc(100% - #{$side * 1px});

@@ -225,6 +225,7 @@
             foo instanceOf Foo -> Foo[Symbol.hasInstance](foo)
         for(description)有返回，无创建（全局的）
         keyFor()
+        
 11.Set
     值唯一（Same-value equality）
     Set.prototype
