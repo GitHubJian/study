@@ -1,0 +1,17 @@
+child_process
+    Node.js 的父进程与衍生的子进程之间会建立 stdin、stdout 和 stderr 的管道。 数据能以非阻塞的方式在管道中流通
+    调用系统的shell脚本
+
+    spawn(command[, args][, options])
+        执行cli中的命令 spawn('ls',['-a'])
+    fork(modulePath[, args][, options])
+        基于spawn专门用于衍生新的 Node.js 进程
+        基于运行环境的目录
+    exec(command[, options][, callback])
+        缓冲任何产生的输出
+    execFile(file[, args][, options][, callback])
+        运行可执行文件
+
+spawn & exec 区别
+spawn 可以执行时输出 数据量大
+exec  一次性输出 数据量 200k
