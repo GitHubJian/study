@@ -1,0 +1,44 @@
+cluster
+    模块允许简单容易的创建共享服务器端口的子进程
+    由主进程负责监听端口，接收新连接后再将连接循环分发给工作进程
+    NODEJS 不支持路由逻辑，不应该过分依赖内存数据对象
+    由 child_process.fork() 创建
+Worker
+    cluster.workers 主进程中对所有进程的引用
+    cluster.worker 工作进程中对该进程的引用
+    
+    on('disconnect',()=>{})
+    on('error',()=>{})
+    on('exit',()=>{})
+    on('listen',()=>{})
+    on('online',()=>{})
+
+    worker.disconnect()
+        调用此方法会关闭所有的server
+    work.exitedAfterDisconnect
+        当调用 .kill() 或者 .disconnect()方法时被设置，在这之前都是 undefined
+        区分自发退出还是被动退出
+    work.id
+        每一个新衍生的工作进程都会被赋予自己独一无二的编号
+    worker.isConnected()
+        一个工作进程在创建后会自动连接到它的主进程
+    worker.isDead()
+        自动退出或被发送信号
+    worker.kill([signal='SIGTERM'])
+        被发送kill信号的工作进程名称
+    worker.process
+        法返回的对象被存储为.process
+    worker.send(message[, sendHandle][, callback])
+
+
+
+cluster.disconnect([callback])
+cluster.fork([env])
+cluster.isMaster
+    process.env.NODE_UNIQUE_ID
+cluster.isWorker
+cluster.schedulingPolicy
+cluster.worker
+    当前工作进程对象的引用，对于主进程则无效
+cluster.workers
+    哈希表，储存了活跃的工作进程对象
