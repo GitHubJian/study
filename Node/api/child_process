@@ -4,13 +4,73 @@ child_process
 
     spawn(command[, args][, options])
         执行cli中的命令 spawn('ls',['-a'])
+        返回ChildProcess实例
     fork(modulePath[, args][, options])
         基于spawn专门用于衍生新的 Node.js 进程
         基于运行环境的目录
     exec(command[, options][, callback])
         缓冲任何产生的输出
     execFile(file[, args][, options][, callback])
-        运行可执行文件
+        运行可执行文件 sh
+
+ChildProcess 类
+    继承EventEmitter 代表衍生的子进程
+    close
+        stdio流关闭时触发
+        code <number> 子进程退出自身，该值为退出码
+        signal <string> 子进程被终止的信号
+        (code, signal)=>{}
+    disconnect
+        subprocess.disconnect() & process.disconnect() 触发事件
+        subprocess.connected = false
+    error
+        触发条件
+            1.进程无法被衍生
+            2.进程无法被杀死
+            3.向子进程发送信息失败
+        err <Error> 错误对象
+        (err)=>{}
+    exit
+        子进程结束后会触发 'exit' 事件，但子进程的 stdio 流可能依然是打开的
+        code <number> 子进程退出自身，该值为退出码
+        signal <string> 子进程被终止的信号
+             至少一个是非空
+        (code, signal)=>{}
+    message
+        message <Object> 一个已解析的JSON对象或原始值
+        sendHandle <Handle> net.Socket 或 net.Server 或 undefined
+        (message,sendHandle)=>{}
+    
+subprocess.channel 对IPC通道的引用 或者 undefined
+subprocess.connected 是否可以对子进程发送消息
+subprocess.disconnect() 关闭父进程与子进程之间的IPC通道
+subprocess.kill([signal]) 向子进程发送一个信号
+    如果信号没有被送达，触发 error 事件
+subprocess.killed
+    该子进程是否已成功接收到 subprocess.kill() 的信号
+subprocess.pid
+    子进程的进程标识（PID）
+subprocess.send(message[, sendHandle[, options]][, callback])
+    向子进程发送消息
+        sendHandle 传入一个 socket 对象？？？？
+        options {keepOpen:false}
+        callback 它在消息发送之后、子进程收到消息之前被调用 (err)=>{if(err){}}
+subprocess.stderr
+    子进程 stderr 的可读流
+        非pipe的值 则会是 null
+subprocess.stdin
+    子进程 stdin 的可写流
+        非pipe的值 则会是 null
+subprocess.stdout
+    子进程的 stdout 的可读流
+        非pipe的值 则会是 null
+subprocess.stdio
+    一个到子进程的管道的稀疏数组 0:stdin 1:stdout 2:stderr
+maxBuffer
+    指定了 stdout 或 stderr 上允许的字节数的最大值
+
+
+
 
 spawn & exec 区别
 spawn 可以执行时输出 数据量大
