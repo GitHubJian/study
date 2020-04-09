@@ -33,3 +33,7 @@
 
 - 将上次修改保留至暂存区
   git reset --soft HEAD~1
+
+- 合并 commit
+  1. git log
+  2. git rebase
