@@ -225,6 +225,7 @@
             foo instanceOf Foo -> Foo[Symbol.hasInstance](foo)
         for(description)有返回，无创建（全局的）
         keyFor()
+        
 11.Set
     值唯一（Same-value equality）
     Set.prototype
@@ -275,6 +276,12 @@
     只接受对象作为Key
     键名是对象的弱引用（垃圾回收机制不将该引用考虑在内）
 15.Proxy
+    修改某些操作的默认行为
+    对编程语言进行编程
+
+    const proxy = new Proxy(target, handler);
+    // 看proxy.js
+
 16.Reflect
     1.将Object对象的一些明显属于语言内部的方法，放到Reflect对象上
     2.修改某些Object方法的返回结果，让其变得更合理
@@ -288,9 +295,11 @@
         get(target,name,receiver)
             方法查找并返回target对象的name属性，如果没有该属性，则返回undefined
         set(target,name,value,receiver)
-            target对象的name属性等于value
+            target对象的name属性等于value,target中的this指向 receiver
         defineProperty(target,name,desc)
             等同于Object.defineProperty
+                在无法定义属性时，Object.defineProperty 会抛出一个错误,
+                Reflect.defineProperty 则会返回false
         deleteProperty(target,name)
             等同于delete obj[name]，用于删除对象的属性
         has(target,name)

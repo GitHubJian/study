@@ -18,7 +18,7 @@ babel-preset-stage-1
     1.parsing 
         babelon进行解析得到AST
     2.transforming
-        plugin用babel-traverse对AST树进行遍历得到新的AST树
+        plugin用babel-traverse对AST树进行遍历得到新的AST树，主要给plugin用
     3.generating
         使用babel-genertor通过AST树生成es5代码
 
